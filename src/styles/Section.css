@@ -1,0 +1,28 @@
+.container {
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    color: #fff;
+    padding: 45px;
+}
+
+.image_content img {
+    max-width: 440px;
+}
+
+.image_content , .text_content {
+    width: 50%;
+}
+
+h2 {
+    position: relative;
+    top: -40px;
+    left: -20px;
+    font-size: 3rem;
+}
+h4 {
+    font-weight: 400;
+    font-size: 1.6rem;
+    text-align: justify;
+    margin-left: 13%;
+}

@@ -1,0 +1,13 @@
+:root {
+    
+}
+
+.formcont {
+    margin: auto;
+    width: 32%;
+    position: relative;
+    top: 20%;
+    min-height: 600px;
+    background-color: rgba(13, 11, 11,0.6);
+    padding: 2em;
+}

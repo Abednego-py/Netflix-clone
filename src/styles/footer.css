@@ -1,0 +1,47 @@
+footer {
+    padding: auto;
+}
+
+.inner-cont_ {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 3em;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+li {
+    margin: 1.2rem;
+    color: #fff;
+    text-align: left;
+    list-style-type: none;
+    color: rgb(107, 100, 100);
+}
+
+a {
+    color: rgb(121, 117, 117);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.sep {
+    /*** className for a p tag ***/
+
+    position: relative;
+    left: -28%;
+    font-size: 1.1rem;
+    color: rgb(117, 111, 111);
+}
+
+.first:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 1.5em;
+}
