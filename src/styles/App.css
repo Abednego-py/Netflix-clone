@@ -52,7 +52,7 @@ input {
   width: 42%;
   height: 55px;
   position: relative;
-  left: -1%;
+  left: -1.1%;
   top: 30px;
   padding-left: 10px;
 }
@@ -65,7 +65,7 @@ input:focus {
   outline: none;
 }
 
-input:focus::placeholder, input:active::placeholder {
+input:focus::placeholder {
   position: relative;
   top: -13px;
   font-size: 0.9em;
@@ -88,7 +88,38 @@ input:focus::placeholder, input:active::placeholder {
   border-radius: 2px;
   position: relative;
   top: 32px;
-  left: -1.35%;
+  left: -0.95%;
+}
+
+#loader {
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  /* background-color: var(--primaryColor); */
+  animation: spin 1s linear infinite;
+  position: absolute;
+  left: 59%;
+  z-index: 1;
+  display: none;
+}
+.loading-style {
+  margin-top: -1.4em;
+}
+.loading-style_ {
+  position: relative;
+  top: 0.72em;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.App button ~ p {
+  font-size: 0.85em;
+  position: relative;
+  left: -16em;
 }
 
 .divider {

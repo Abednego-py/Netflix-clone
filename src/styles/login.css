@@ -16,7 +16,7 @@ h3 {
     width: 32%;
     position: relative;
     top: 20%;
-    min-height: 600px;
+    min-height: 500px;
     background-color: rgba(13, 11, 11,0.75);
     padding: 2em;
 }
@@ -25,6 +25,7 @@ h3 {
     margin: 1.5em 0;
     width: 100%;
     border-radius: 5px;
+    height: 45px;
     border: none;
     background-color: rgb(235, 234, 234);
 }
@@ -42,15 +43,23 @@ input[type='checkbox'] {
 input ~ p {
     color: rgb(236, 130, 0);
     font-size: 0.7em;
-    margin-bottom: 0;
+    top: 0.3em;
+    margin-bottom: -1.8em;
+    height: fit-content;
+    position: relative;
+
 }
 input:invalid {
-    box-shadow: 5px 5px rgb(236, 130, 0);
+    box-shadow: 0px 1px rgb(236, 130, 0);
+    /* background-color: rgb(118, 117, 117); */
+    /* margin-bottom: 0; */
 }
+
+
 .check-cont {
     display: block;
     position: relative;
-    top: 1.5em;
+    top: 1.6em;
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -59,6 +68,7 @@ input:invalid {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-size: 0.7em;
   }
 
 .check-cont input {
@@ -69,24 +79,29 @@ input:invalid {
     width: 0;
   }
 
+  .check-cont span {
+    font-size: 0.9em;
+  }
+
 .checkmark {
     position: absolute;
     top: 0;
     left: 0;
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
+    margin-right: -1.7em;
     background-color: #fff;
 }
 
 
 /* On mouse-over, add a grey background color */
 .check-cont:hover input ~ .checkmark {
-    background-color: grey;
+    background-color: red;
   }
   
   /* When the checkbox is checked, add a blue background */
   .check-cont input:checked ~ .checkmark {
-    background-color: #fff;
+    background-color: blue;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -103,8 +118,8 @@ input:invalid {
   
   /* Style the checkmark/indicator */
 .check-cont .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 6px;
+    top: 3px;
     width: 5px;
     height: 10px;
     border: solid black;
@@ -124,9 +139,34 @@ input:invalid {
     outline: none;
     border: none;
     cursor: pointer;
+    margin-top: 1em;
 }
 
-
+.need-help {
+    font-size: 0.65em;
+    float: right;
+    position: relative;
+    top: -2.45em;
+}
+.need-help > a {
+    color: #fff;
+}
+.final-content {
+    display: flex;
+    position: relative;
+    top: 2em;
+}
+.final-content p {
+    font-size: 0.7em;
+    width: 50%;
+}
+.final-content > a {
+    font-size: 0.7em;
+    width: 50%;
+    position: relative;
+    top: 1.9em;
+    color: #fff;
+}
 AppFooter {
     background-color: rgba(13, 11, 11,0.3);
 }

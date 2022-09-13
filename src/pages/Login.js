@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import logo from '../images/logo.png'
 import '../styles/App.css';
 import '../styles/login.css'
-import AppFooter from './footer';
+import AppFooter from '../components/footer';
 import { createUseStyles } from 'react-jss'
 import { useState } from 'react';
 import styles from '../styles/login-styles.module.css'
 import { useForm } from "react-hook-form";
+import { ErrorMessage } from '@hookform/error-message';
 
 const styles_ = createUseStyles({
   AppFooter: {
@@ -15,8 +16,10 @@ const styles_ = createUseStyles({
   }
 })
 export default function Login() {
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
+  const [focused, setFocused] = React.useState(false)
+  const onFocus = () => setFocused(true)
+  const onBlur = () => setFocused(false)
+
 
   const [inputs, setInputs] = useState({});
 
@@ -43,7 +46,7 @@ export default function Login() {
         <div className='form-cont'>
           <h3>Sign In</h3>
 
-          <form action="/App.js" onSubmit={handleSubmit(onSubmit)}>
+          <form action="http://127.0.0.1:5000/login" onSubmit={handleSubmit(onSubmit)}>
             <input
               type='email phone' 
               className='login' 
@@ -51,12 +54,24 @@ export default function Login() {
               name='email'
               value={inputs.email}
               onChange={handleChange}
+              onFocus ={onFocus}
+              onBlur={onBlur}
+              
               {...register("email", 
-                  { required: true,  
-                    pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
+                  { required: {
+                    value: true,
+                    message: 'Email cannot be empty'
+                  },  
+                    pattern: { 
+                     value : /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ,
+                     message: 'Please enter a valid email'
+                    }
                     })} />
-
-          {errors.email && <p>Please enter a valid email</p>}
+                    <ErrorMessage
+                    errors={errors}
+                    name="email"
+                    render={({ message }) => <p>{message}</p>}
+                  />
 
             <input 
             type="password" 
@@ -66,21 +81,37 @@ export default function Login() {
             value={inputs.password}
             onChange={handleChange} 
             {...register("password", { 
-              required: true, 
-              pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
+              required: {
+                value :true,
+                message : 'password cannot be empty'
+              }, 
+              pattern:{
+              value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+              message : 'Please use a strong password'
+            }
           })}
             />
-            {errors.password && <p>Please check the Password</p>}
+            <ErrorMessage
+                    errors={errors}
+                    name="password"
+                    render={({ message }) => <p>{message}</p>}
+                  />
 
             <button type="submit" className='login-button'>Sign In</button>
           </form>
+
           <label htmlFor="remember-me" className='check-cont'>
-          <input type="checkbox" checked name="remember-me" id="remember-me" />Remember me
+          <input type="checkbox" name="remember-me" id="remember-me" /><span>Remember me</span>
           <span className='checkmark'></span>
           </label>
-          <p><a href="#needhelp">Need Help?</a></p>
+          <p className='need-help'><a href="#needhelp">Need Help?</a></p>
 
-          <p>New to Netflix?</p><a href="/signUp">Sign up Now</a>
+          <div className="final-content">
+          <p>New to Netflix?</p>
+          <Link to={'/'}>
+          <a href="/signUp">Sign up Now</a>
+          </Link>
+          </div>
         </div>
 
       </div>

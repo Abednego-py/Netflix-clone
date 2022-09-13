@@ -1,6 +1,8 @@
 import React from 'react'
 import '../styles/faq.css'
-
+import { useForm } from "react-hook-form";
+import { useState } from 'react';
+import { ErrorMessage } from '@hookform/error-message';
 
 function toggleContent(event) {
     let content = event.target.className.substring(9);
@@ -14,7 +16,49 @@ function toggleContent(event) {
     answerCont.style.display = 'block'
     }
 }
+
 export default function FAQ() {
+
+    const [inputEmail_, setInputEmail_] = useState('');
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const handleChange = (event) => {
+        const value = event.target.value;
+        setInputEmail_(value);
+      }
+
+      const onSubmit = (data) => {
+        let headers = new Headers();
+        headers.append('Origin','*');
+        headers.append('Content-Type', 'application/json');
+        fetch('http://127.0.0.1:5000/register', 
+        {
+          mode : 'cors',
+          method: 'post',
+          
+          body : JSON.stringify({
+            'email': data.email
+          }),
+          headers : headers
+        })
+        .then( res => {
+          if (!res.ok) {
+            throw Error(res.status);
+           }
+           return res.json();
+          }
+        )
+        .then(
+          data => console.log(data),
+          // navigate('/signup')
+        )
+        .catch(
+          ()=> {}
+        )
+    
+      }
+
   return (
     <div className='cont'>
         <h2 className='title'>Frequently Asked Questions</h2>
@@ -107,9 +151,33 @@ export default function FAQ() {
         </div>
         </div>
         <p>Ready to watch? Enter your email to create or restart your membership.</p>
-        <form action="">
-        <input type='email' placeholder='Email Address'/> <button type='submit' style={{marginLeft : '2px'}}>Get Started  &nbsp; <span> &#62;</span></button>
-        </form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <input 
+        type='email' 
+        placeholder='Email Address' 
+        name='email'
+        value={inputEmail_.email}
+        onChange={handleChange}
+
+       {...register("email", 
+                  { required: {
+                    value: true,
+                    message: 'Email cannot be empty'
+                  },  
+                    pattern: { 
+                     value : /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ,
+                     message: 'Please enter a valid email'
+                    }
+                    })} />
+
+            <button type='submit'>Get Started  &nbsp; <span> &#62;</span></button>
+            <ErrorMessage
+                    errors={errors}
+                    name="email"
+                    render={({ message }) => <p>{message}</p>}
+                  />
+
+                  </form>
     </div>
   )
 }

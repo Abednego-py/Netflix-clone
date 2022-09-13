@@ -2,19 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
-import Login from './components/Login';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <Routes>
-       <Route path='/' element={<App />} />
-       <Route path='/login' element={<Login />} />
-       
+      <Route path='/' element={<App />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/signup' element={<SignUp />} />
     </Routes>
-    </Router>
+  </Router>
 
 );
 
